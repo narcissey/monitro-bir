@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const token = "Mzg4NzgyMzQ0MzM4ODAwNjQx.DRW3Mw.mzyi-KzsQgLDMCjdh1XiSrD9R0s";
 
 var prefix = "!";
  
@@ -301,4 +300,4 @@ msg.channel.send(`**${member.user.username}** a bien été unmute**`);
 }
 });
 
-client.login(token)
+client.login(process.env.TOKEN)
