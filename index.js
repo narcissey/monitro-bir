@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const token = "Mzg4NzgyMzQ0MzM4ODAwNjQx.DRdrlg.WJGfOR6cntkBt1Z_L8pPlcCnqt0";
+
 
 var prefix = "*";
 var test = 2;
@@ -672,4 +672,4 @@ message.channel.send(":wastebasket: | `" + amount + "` messages supprimés");
 }
 });
 
-client.login(token)
+client.login(process.env.TOKEN)
