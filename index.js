@@ -39,11 +39,6 @@ if (message.content.startsWith(prefix + "avatar")) {
     }
   message.channel.send("", {embed})
 }
-if(message.content.startsWith("*say")){
-  message.delete();
-  message.channel.send(message.content.split(" ").slice(1).join(" "));
-}
-
 if(message.content.startsWith(prefix + "invite")) {    // Donc ici ton !help (le préfixe que t'as mis est !)
     message.channel.send({
             embed: {
