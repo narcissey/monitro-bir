@@ -107,8 +107,12 @@ if(message.content === prefix + "help") {
 		.addField('\n__**:video_game:  Fun**__',' **lol =>** Je répond \n **XD =>** je répond  ? \n***google =>** Permet de faire un recherche google \n***afk =>** Permet de se mettre afk \n***remafk =>** enlève ton afk \n ')
 		.addField('\n__**:hammer_and_pick: Administration**__',' ***kick =>** Permet kick un membre  \n ****ban =>***Ban un membre \n***mute =>** Permet de  mute un membre \n***unmute =>** Permet de unmute un membre \n***say =>** Permet de faire parler le bot  \n')
 message.author.send(help_embed);
-});
-    
+}});
+	
+
+	
+	
+
 client.on('message', message => {
   if (message.content.startsWith('*play')) {
     // On récupère le premier channel audio du serveur
