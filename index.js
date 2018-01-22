@@ -22,24 +22,7 @@ let games = [`Createur Narcisse| prefix: ${prefix}`, `` + prefix + `help`,`` + s
 
 });
 client.on('message', message => {
-if(message.content.startsWith("bonjour")){
-message.channel.send(`Hey ca va **${message.author.username}** ?`)
-}
-if(message.content.startsWith("lol")){
-message.channel.send(`Hmm pas marrant`)
-}
-if(message.content.startsWith("re")){
-message.channel.send(`Hey **${message.author.username}** est revenue`)
-}
-if(message.content.startsWith("XD")){
-message.channel.send(`MDR`)
-}
-if(message.content.startsWith("bonjour")){
-message.channel.send(` Hey ca va **${message.author.username}** ?`)
-}
-if(message.content.startsWith("GG")){
-message.channel.send(`je te connais pas mais gg`)
-}
+
 if(message.content.startsWith("*help")){
 message.channel.send(` **:envelope_with_arrow: Le help est en Message privé** `)
 }
@@ -102,9 +85,9 @@ if(message.content === prefix + "help") {
 		.setColor('#FF0500')
 		.setTitle('Liste des commandes')
 		.setFooter('Made by Narcisse')
-		.addField('__**:gear:  Utile**__','\n ***avatar =>** Je donnes avatar de la personne mentionnee. \n ***ping =>** Je reponds Pong + Ms')
-		.addField('\n__**:newspaper2: Bot-Utiles**__','\n ***botinfos =>** Informations sur le bot \n ***invite =>** Invite le bot sur ton serveur \n ***serveur =>** rejoins mon serveur ')
-		.addField('\n__**:video_game:  Fun**__',' **lol =>** Je répond \n **XD =>** je répond  ? \n***google =>** Permet de faire un recherche google \n***afk =>** Permet de se mettre afk \n***remafk =>** enlève ton afk \n ')
+		.addField('__**:gear:  Utile**__','\n ***avatar =>** Je donne  l avatar de la personne mentionnée \n ***ping =>** Je repond Pong + Ms')
+		.addField('\n__**:newspaper2: Bot-Utiles**__','\n ***botinfos =>** Informations sur le bot \n ***invite =>** Invite le bot sur ton serveur \n ***serveur =>** rejoint mon serveur ')
+		.addField('\n__**:video_game:  Fun**__',' ***flip =>** Je lance une pièce \n ***test =>** pour voir si le bot fonctionne \n***google =>** Permet de faire un recherche google \n***afk =>** Permet de se mettre afk \n***remafk =>** enlève ton afk \n ')
 		.addField('\n__**:hammer_and_pick: Administration**__',' ***kick =>** Permet kick un membre  \n ****ban =>***Ban un membre \n***mute =>** Permet de  mute un membre \n***unmute =>** Permet de unmute un membre \n***say =>** Permet de faire parler le bot  \n')
 message.author.send(help_embed);
 }});
