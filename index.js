@@ -161,7 +161,7 @@ if (message.content === "*flip") {
 
 });
 client.on("message", message => {
-    if(message.content.startsWith(prefix + "google")) {
+    if(message.content.startsWith(prefix + "search_google")) {
         var host_search_google = "https://www.google.fr/search?q=";
         var search_google = message.content.substr(16);        // Il faut adapter le nombre (ici 16) selon le préfixe. S'il y en a qu'un seul par exemple &, il faut mettre 15, 2 par exemple && c'est 16, 3 par exemple &&& c'est 17 ...
 
@@ -281,7 +281,7 @@ msg.channel.send("Erreur ! Tu es déjà afk");
 
 if (msg.content.startsWith(prefix + "afk")||msg.content === prefix + "afk") {
 if (afk[msg.author.id]) {
-return message.channel.send("Erreur ! Tu es d�ja� afk -_-");
+return message.channel.send("Erreur ! Tu es déja afk -_-");
 }else{
 let args1 = msg.content.split(" ").slice(1);
 if (args1.length === 0) {
