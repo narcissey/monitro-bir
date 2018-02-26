@@ -1,82 +1,78 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-
-
+ 
+ 
 var prefix = "*";
 var test = 2;
-
+ 
  client.on("ready", () => {
-
+ 
 var memberNumber = client.users.size;
 var serverNumber = client.guilds.size;
 let games = [`Createur Narcisse| prefix: ${prefix}`, `` + prefix + `help`,`` + serverNumber + ` serveur`|+ memberNumber +`user`];
     setInterval(() => {
         client.user.setGame(games[Math.floor(Math.random() * games.length)], "https://twitch.tv/narcissetisel")
     }, 5000);
-
+ 
  client.user.setStatus("idle");
-
+ 
 	console.log("--------------------------------------");
-
+ 
   console.log("MoNitro online\nNombre de serveurs: " + serverNumber + "\navec\n" + memberNumber + " utilisateurs");
-
+ 
 });
 client.on('message', message => {
-
+ 
 let msg = message.content.toUpperCase();                                          let sender = message.author;                                 
 let cont = message.content.slice(prefix.length).split(" ");                                                             
 let args = cont.slice(1);                                                                let messageArray = message.content.split(" ");                                            let cmd = messageArray[0];
-
+ 
 if(message.content.startsWith("*help")){
 message.channel.send(` **:envelope_with_arrow: Le help est en Message privé** `)
 }
 if(message.content.startsWith("*serveur")){ message.channel.send(`Hey tu peux rejoindre le serveur des createurs du bot Ici https://discord.gg/EupK3xW`) 
 }
-if (msg.startsWith(prefix + 'méteo')) {                                                                                            weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) { // Make sure you get that args.join part, since it adds everything after weather.                                               if (err) message.channel.send(err);
-                                                                                                                                                   if (result === undefined || result.length === 0){
-                message.channel.send('**Veuillez entrer un lieu valide.**') // This tells them in chat that the place they entered is invalid.                                                                              return; // This exits the code so the rest doesn't run.                                           }                                                                                                                                                                                                         
-                                                                                         var current = result[0].current;                                                                                                              var location = result[0].location;
-                                                                                                               
-            const embed = new Discord.RichEmbed()                                                                     .setDescription(`**${current.skytext}**`) 
-.setAuthor(`Weather for ${current.observationpoint}`)
- .setThumbnail(current.imageUrl)                            
-.setColor(0x00AE86)                                       
-.addField('Fuseau horaire',`UTC${location.timezone}`, true)                                                                   
- .addField('Type de degré',location.degreetype, true)
+if (msg.startsWith(prefix + 'méteo')) {                                                                                    // You can find some of the code used here on the weather-js npm page in the description.                                                                                                                   weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) { // Make sure you get that args.join part, since it adds everything after weather.                                               if (err) message.channel.send(err);
+                                                                                                                  // We also want them to know if a place they enter is invalid.                                        if (result === undefined || result.length === 0){
+                message.channel.send('**Veuillez entrer un lieu valide.**') // This tells them in chat that the place they entered is invalid.                                                                              return; // This exits the code so the rest doesn't run.                                           }                                                                                                                                                                                                           // Variables                                                                                          var current = result[0].current; // This is a variable for the current part of the JSON output                                                                                                              var location = result[0].location; // This is a variable for the location part of the JSON
+ output
+                                                                                                                  // Let's use an embed for this.
+            const embed = new Discord.RichEmbed()                                                     
+.setDescription(`**${current.skytext}**`) 
+.setAuthor(`Weather for ${current.observationpoint}`) // This shows the current location of the weather.                                                                                 .setThumbnail(current.imageUrl) // This sets the thumbnail of the embed                               
+.setColor(0x00AE86) // This sets the color of the embed, you can set this to anything if you look put a hex color picker, just make sure you put 0x infront of the hex                                      .
+addField('Fuseau horaire',`UTC${location.timezone}`, true) // This is the first field, it shows the timezone, and the true means `inline`, you can read more about this on the official discord.js documentation                                                                   .addField('Type de degré',location.degreetype, true)// This is the field that shows 
                 .addField('Temperature',`${current.temperature} °`, true)
                 .addField(':thermometer: Se sent comme', `${current.feelslike} °`, true)
                 .addField(':dash:  les vents',current.winddisplay, true)
                 .addField(':sweat_drops:Humidité', `${current.humidity}%`, true)
-
-            
+ 
+                // Now, let's display it when called
                 message.channel.send({embed});
-        });
+
     }
 if(cmd === `${prefix}report`){
-                                                                                                    
+                                                                                                          //!report @ned this is the reason
                                                                                                           let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!rUser) return message.channel.send(":warning: Imposible de trouver cette utilisateur");           let rreason = args.join(" ").slice(22);                                                                                                                                                                     let reportEmbed = new Discord.RichEmbed()                                                             .setDescription("Reports")                                                                           .setColor("#15f153")
-    .addField("Reported User", `${rUser} with ID: ${rUser.id}`)                                           
-.addField("Report Par", `${message.author}  ID: ${message.author.id}`)
+    if(!rUser) return message.channel.send(":warning: Imposible de trouver cette utilisateur");           let rreason = args.join(" ").slice(22);                                                                                                                                                                     let reportEmbed = new Discord.RichEmbed()                                                             .setDescription("Reports")                                                                            .setColor("#15f153")
+    .addField("Reported User", `${rUser} with ID: ${rUser.id}`)                                           .addField("Report Par", `${message.author}  ID: ${message.author.id}`)
     .addField("Channel", message.channel)
     .addField("Heure", message.createdAt)
     .addField("Reason", rreason);
-
+ 
     let reportschannel = message.guild.channels.find(`name`, "reports");
-    if(!reportschannel) return message.channel.send(":warning: Impossible de trouver la chaîne de raports.");
-
-
+    if(!reportschannel) return message.channel.send(":warning: Impossible de trouver la chaîne de rappports.");
+ 
+ 
     message.delete().catch(O_o=>{});                                                                      reportschannel.send(reportEmbed);                                                                                                                                                                           return;                                                                                             }
 if(cmd === `${prefix}serverinfos`){
-
+ 
     let sicon = message.guild.iconURL;
     let serverembed = new Discord.RichEmbed()
-    .setDescription("Server Informations")                                                    
-.setColor("#15f153")
+    .setDescription("Server Informations")                                                    .setColor("#15f153")
     .setThumbnail(sicon)
     .addField(":shield: Nom du serveur", message.guild.name)
-    .addField(":crown: Fondateur", `${message.guild.owner.user.tag}`)                          
-.addField(":hammer_and_pick:  Date de creation ", message.guild.createdAt)
+    .addField(":crown: Fondateur", `${message.guild.owner.user.tag}`)                          .addField(":hammer_and_pick:  Date de creation ", message.guild.createdAt)
     .addField(":airplane_arriving:  Tu a rejoint", message.member.joinedAt)                    .addField(":earth_americas: Region", `${message.guild.region}`)
      .addField('Channels', `${message.guild.channels.filter(chan => chan.type === 'voice')
 .size} :loud_sound: / ${message.guild.channels.filter(chan => chan.type === 'text').size}
@@ -94,7 +90,7 @@ if (message.content.startsWith(prefix + "avatar")) {
     }
   message.channel.send("", {embed})
 }
-if(message.content.startsWith(prefix + "invite")) {  
+if(message.content.startsWith(prefix + "invite")) {    // Donc ici ton !help (le préfixe que t'as mis est !)
     message.channel.send({
             embed: {
                 color: 0xC12127,
@@ -135,17 +131,17 @@ if(message.content === prefix + "help") {
 		.setColor('#FF0500')
 		.setTitle('Liste des commandes')
 		.setFooter('Made by Narcisse')
-		.addField('__**:gear:  Utile**__','\n ***avatar =>** Je donne  l avatar de la personne mentionnée \n ***ping =>** Je repond Pong + Ms')***report =>** Permet de report une personne au pres des admins  \n***méteo <ville> =>** Permet de voir la météo d'une ville \n***serverinfos=>** Permet de voir kes infos d'un serveur \n
-		.addField('\n__**:newspaper2: Bot-Utiles**__','\n ***botinfos =>** Informations sur le bot \n ***invite =>** Invite le bot sur ton serveur \n ***serveur =>** rejoint mon serveur ')
+		.addField('__**:gear:  Utile**__','\n ***avatar =>** Je donne  l avatar de la personne mentionnée \n ***ping =>** Je repond Pong + Ms')
+		.addField('\n__**:newspaper2: Bot-Utiles**__','\n ***botinfos =>** Informations sur le bot \n ***report =>** Permet de report une personne au pres des admins  \n***méteo <ville> =>** Permet de voir la météo de la ville \n***serverinfos=>** Permet de voir les infos du derveur \n***invite =>** Invite le bot sur ton serveur \n ***serveur =>** rejoint mon serveur ')
 		.addField('\n__**:video_game:  Fun**__',' ***flip =>** Je lance une pièce \n ***test =>** pour voir si le bot fonctionne \n***search_google =>** Permet de faire un recherche google \n***afk =>** Permet de se mettre afk \n***remafk =>** enlève ton afk \n ')
 		.addField('\n__**:hammer_and_pick: Administration**__',' ***kick =>** Permet kick un membre  \n ****ban =>***Ban un membre \n***mute =>** Permet de  mute un membre \n***unmute =>** Permet de unmute un membre \n***say =>** Permet de faire parler le bot  \n')
 message.author.send(help_embed);
 }});
 	
-
+ 
 	
 	
-
+ 
 client.on('message', message => {
   if (message.content.startsWith('*play')) {
     // On récupère le premier channel audio du serveur
@@ -174,19 +170,19 @@ client.on('message', message => {
           })
       })
   }
-
+ 
 })
 	client.on('message', message => {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
-
+ 
     if (message.content.startsWith(prefix + 'ping')) {
         message.channel.sendMessage('**Pong 🏓!** `' + `${Date.now() - message.createdTimestamp}` + ' ms`');
     }
 });
 var fs = require('fs');
 let points = JSON.parse(fs.readFileSync('./points.json', 'utf8'));
-
+ 
 client.on("message", message => {
 if(!message.content.startsWith(prefix)) return;
 if(message.author.bot) return;
@@ -213,17 +209,17 @@ if (message.content === "*flip") {
     		message.channel.send("**Face !**");
     	}
     }
-
+ 
 });
 client.on("message", message => {
     if(message.content.startsWith(prefix + "search_google")) {
         var host_search_google = "https://www.google.fr/search?q=";
         var search_google = message.content.substr(16);        // Il faut adapter le nombre (ici 16) selon le préfixe. S'il y en a qu'un seul par exemple &, il faut mettre 15, 2 par exemple && c'est 16, 3 par exemple &&& c'est 17 ...
-
+ 
         var replace_google = /\s/gi;
         var string_google = search_google;
         var newstring_google = string_google.replace(replace_google, "+");
-
+ 
         message.channel.send({
             embed: {
                 color: 0xC12127,
@@ -292,32 +288,32 @@ channel.send(`message by ${message.author.username} a edité
 ${message.content} à ${oldMessage}`);
 }}
 });
-
+ 
  client.on('message', message => {
-
-
+ 
+ 
    if (message.content.startsWith(prefix + "logout")) {
-
+ 
      if(message.author.id === "165878519107289088"){
-
+ 
       message.reply("Arrêt en cour");
-
+ 
         console.log('/ Je suis désormais offline / ');
-
+ 
         client.destroy();
-
+ 
         process.exit()
-
+ 
     } else {
-
+ 
       message.channel.send("**Erreur** ! Tu n'es pas le Créateur")
-
+ 
     }
   }  
-
+ 
 const fs = require("fs");
 var msg = message;
-
+ 
 let afk = JSON.parse(fs.readFileSync("./afks.json", "utf8"));
 if (message.content.startsWith(prefix + "remafk")){
 if (afk[msg.author.id]) {
@@ -332,8 +328,8 @@ fs.writeFile("./afks.json", JSON.stringify(afk), (err) => { if (err) console.err
 msg.channel.send("Erreur ! Tu es déjà afk");
 }
 }
-
-
+ 
+ 
 if (msg.content.startsWith(prefix + "afk")||msg.content === prefix + "afk") {
 if (afk[msg.author.id]) {
 return message.channel.send("Erreur ! Tu es déja afk -_-");
@@ -362,72 +358,72 @@ message.channel.send(`@${mentionned.username} is AFK: ${afk[msg.mentions.users.f
 }
 }
 }
-
+ 
 if(message.content.startsWith(prefix + "test")){
-
+ 
 (async function() {
-
+ 
  const mainMessage = await message.channel.send("Test des réactions:\n **Page.1**");
-
+ 
 await mainMessage.react("◀");
 await mainMessage.react("▶");
 await mainMessage.react("🛑");
-
+ 
 const panier = mainMessage.createReactionCollector((reaction, user) => user.id === message.author.id);
  
 panier.on('collect', async(reaction) => 
 {
  if (reaction.emoji.name === "◀") {
-
+ 
 mainMessage.edit("Test des réactions:\n **Page.1**");
-
+ 
  }
 if (reaction.emoji.name === "▶") {
-
+ 
 mainMessage.edit("Test des réactions:\n **Page.2**");
  
 }
 if (reaction.emoji.name === "🛑") {
-
+ 
 mainMessage.delete()
-
+ 
  }
-
+ 
  await reaction.remove(message.author.id);
-
+ 
 });
  }());
 }
 if(message.content.startsWith(prefix + "reminder")){
 if(message.channel.type === "dm") return;
-
+ 
 if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")){return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
-
+ 
 }else{
-
+ 
 let args = message.content.split(' ');
 let time = args[1];
 let timeofreminder = message.content.slice(2, args.length);
-
+ 
 function reminder (remind, toRemind) {
-
+ 
 if(!time){
 message.channel.send("**:x: Erreur format, Correcte usage: `"+ prefix + "reminder <time en secondes !> <votre reminder>`**");
 }else{
 if(message.content.includes("reminder .")){
-
+ 
 setInterval(function() {
-
+ 
 message.channel.send();
 }, (time * 1000));
 message.channel.send("** J'ai enlevé votre reminder avec succès :wink:**");
 }else{
-
+ 
 setInterval(function() {
-
+ 
 message.channel.send(message.content.slice(message.content.indexOf(message.content.split(" ")[2])));
 }, (time * 1000));
-
+ 
 message.channel.send("** J'ai ajouter votre reminder avec succès ! Tapez `" + prefix + "reminder .` pour l'enlever :wink:**");
 }
 }
@@ -435,7 +431,7 @@ message.channel.send("** J'ai ajouter votre reminder avec succès ! Tapez `" + p
 reminder(time, timeofreminder);
 }
 }
-
+ 
 if(msg.content.startsWith(prefix + 'ban')){
 if(msg.channel.type === 'dm') return;
 if(!msg.guild.member(msg.author).hasPermission('ADMINISTRATOR')){
@@ -518,7 +514,7 @@ let userRoleID = message.guild.roles.find("name", `${amount}`);
 if(!message.guild.roles.exists("name", `${amount}`)) {
         message.channel.send(":x: Le role **"+amount+"** n'a pas été trouvé");
       }else{
-
+ 
             addmember.addRole(userRoleID).catch(error => console.log(error));
   message.channel.send(`**${addmember}** à désormais le role **${amount} :smile:**`)
 }
@@ -526,7 +522,7 @@ if(!message.guild.roles.exists("name", `${amount}`)) {
 if (message.content.startsWith(prefix + "purge")) {
 if (message.channel.type === "dm") return;
 if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return message.reply("**:x: Vous n'avez pas la permission `manage-guild` dans ce serveur**").catch(console.error);
-
+ 
 const user = message.mentions.users.first();
  const amount = !!parseInt(message.content.split(' ')[1]) ? parseInt(message.content.split(' ')[1]) : parseInt(message.content.split(' ')[2])
 if (!amount) return message.reply('**:x: Veuillez spécifier une limite de message**');
@@ -548,11 +544,12 @@ const filterBy = user ? user.id : Client.user.id;
 messages = messages.filter(m => m.author.id === filterBy).array().slice(0, amount);
  }
  message.channel.bulkDelete(messages).catch(error => console.log(error.stack));
-
+ 
 message.channel.send(":wastebasket: | `" + amount + "` messages supprimés");
-
+ 
 });
 }
 });
-
+ 
 client.login(process.env.TOKEN)
+ 
