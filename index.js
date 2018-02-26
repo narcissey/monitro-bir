@@ -55,15 +55,15 @@ if (msg.startsWith(prefix + 'méteo')) {                                        
 if(cmd === `${prefix}report`){
                                                                                                     
                                                                                                           let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!rUser) return message.channel.send(":warning: Imposible de trouver cette utilisateur");           let rreason = args.join(" ").slice(22);                                                                                                                                                                     let reportEmbed = new Discord.RichEmbed()                                                             .setDescription("Reports")                                                                            .setColor("#15f153")
-    .addField("Reported User", `${rUser} with ID: ${rUser.id}`)                                           .addField("Report Par", `${message.author}  ID: ${message.author.id}`)
+    if(!rUser) return message.channel.send(":warning: Imposible de trouver cette utilisateur");           let rreason = args.join(" ").slice(22);                                                                                                                                                                     let reportEmbed = new Discord.RichEmbed()                                                             .setDescription("Reports")                                                                           .setColor("#15f153")
+    .addField("Reported User", `${rUser} with ID: ${rUser.id}`)                                           
+.addField("Report Par", `${message.author}  ID: ${message.author.id}`)
     .addField("Channel", message.channel)
     .addField("Heure", message.createdAt)
     .addField("Reason", rreason);
 
     let reportschannel = message.guild.channels.find(`name`, "reports");
-    if(!reportschannel) return message.channel.send(":warning: Impossible de trouver la chaîne de rapp
-ports.");
+    if(!reportschannel) return message.channel.send(":warning: Impossible de trouver la chaîne de raports.");
 
 
     message.delete().catch(O_o=>{});                                                                      reportschannel.send(reportEmbed);                                                                                                                                                                           return;                                                                                             }
