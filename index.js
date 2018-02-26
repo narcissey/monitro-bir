@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const weather = require('weather-js');
+ 
  
 var prefix = "*";
 var test = 2;
@@ -134,7 +134,7 @@ if(message.content === prefix + "help") {
 		.addField('__**:gear:  Utile**__','\n ***avatar =>** Je donne  l avatar de la personne mentionnée \n ***ping =>** Je repond Pong + Ms')
 		.addField('\n__**:newspaper2: Bot-Utiles**__','\n ***botinfos =>** Informations sur le bot \n ***report =>** Permet de report une personne au pres des admins  \n***méteo <ville> =>** Permet de voir la météo de la ville \n***serverinfos=>** Permet de voir les infos du derveur \n***invite =>** Invite le bot sur ton serveur \n ***serveur =>** rejoint mon serveur ')
 		.addField('\n__**:video_game:  Fun**__',' ***flip =>** Je lance une pièce \n ***test =>** pour voir si le bot fonctionne \n***search_google =>** Permet de faire un recherche google \n***afk =>** Permet de se mettre afk \n***remafk =>** enlève ton afk \n ')
-		.addField('\n__**:hammer_and_pick: Administration**__',' ***kick =>** Permet kick un membre  \n ****ban =>***Ban un membre \n***mute =>** Permet de  mute un membre \n***unmute =>** Permet de unmute un membre \n***say =>** Permet de faire parler le bot  \n')
+		.addField('\n__**:hammer_and_pick: Administration**__',' ***kick =>** Permet kick un membre  \n ****ban =>***Ban un membre \n***mute =>** Permet de  mute un membre \n***unmute =>** Permet de unmute un membre \n')
 message.author.send(help_embed);
 }});
 	
