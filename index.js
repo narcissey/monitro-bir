@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
- 
+ const weather = require("weather-js");
  
 var prefix = "*";
 var test = 2;
@@ -11,7 +11,7 @@ var memberNumber = client.users.size;
 var serverNumber = client.guilds.size;
 let games = [`Createur Narcisse| prefix: ${prefix}`, `` + prefix + `help`,`` + serverNumber + ` serveur`|+ memberNumber +`user`];
     setInterval(() => {
-        client.user.setGame(games[Math.floor(Math.random() * games.length)], "https://twitch.tv/narcissetisel")
+        client.user.setGame(games[Math.floor(Math.random() * games.length)], "https://twitch.tv/bot")
     }, 5000);
  
  client.user.setStatus("idle");
