@@ -32,29 +32,28 @@ message.channel.send(` **:envelope_with_arrow: Le help est en Message privé** `
 }
 if(message.content.startsWith("*serveur")){ message.channel.send(`Hey tu peux rejoindre le serveur des createurs du bot Ici https://discord.gg/EupK3xW`) 
 }
-if (msg.startsWith(prefix + 'méteo')) { // This checks to see if the beginning of the message is call
-ling the weather command.                                                                                     // You can find some of the code used here on the weather-js npm page in the description.                                                                                                                   weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) { // Make sure you get that args.join part, since it adds everything after weather.                                               if (err) message.channel.send(err);
-                                                                                                                  // We also want them to know if a place they enter is invalid.                                        if (result === undefined || result.length === 0){
-                message.channel.send('**Veuillez entrer un lieu valide.**') // This tells them in chat that the place they entered is invalid.                                                                              return; // This exits the code so the rest doesn't run.                                           }                                                                                                                                                                                                           // Variables                                                                                          var current = result[0].current; // This is a variable for the current part of the JSON output                                                                                                              var location = result[0].location; // This is a variable for the location part of the JSON
- output
-                                                                                                                  // Let's use an embed for this.
-            const embed = new Discord.RichEmbed()                                                                     .setDescription(`**${current.skytext}**`) // This is the text of what the sky looks li
-ke, remember you can find all of this on the weather-js npm page.       
-.setAuthor(`Weather for ${current.observationpoint}`) // This shows the current location of the weather.                                                                                 .setThumbnail(current.imageUrl) // This sets the thumbnail of the embed                               
-.setColor(0x00AE86) // This sets the color of the embed, you can set this to anything if you look put a hex color picker, just make sure you put 0x infront of the hex                                      .
-addField('Fuseau horaire',`UTC${location.timezone}`, true) // This is the first field, it shows the timezone, and the true means `inline`, you can read more about this on the official discord.js documentation                                                                   .addField('Type de degré',location.degreetype, true)// This is the field that shows tt
-he degree type, and is inline
+if (msg.startsWith(prefix + 'méteo')) {                                                                                            weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) { // Make sure you get that args.join part, since it adds everything after weather.                                               if (err) message.channel.send(err);
+                                                                                                                                                   if (result === undefined || result.length === 0){
+                message.channel.send('**Veuillez entrer un lieu valide.**') // This tells them in chat that the place they entered is invalid.                                                                              return; // This exits the code so the rest doesn't run.                                           }                                                                                                                                                                                                         
+                                                                                         var current = result[0].current;                                                                                                              var location = result[0].location;
+                                                                                                               
+            const embed = new Discord.RichEmbed()                                                                     .setDescription(`**${current.skytext}**`) 
+.setAuthor(`Weather for ${current.observationpoint}`)
+ .setThumbnail(current.imageUrl)                            
+.setColor(0x00AE86)                                       
+.addField('Fuseau horaire',`UTC${location.timezone}`, true)                                                                   
+ .addField('Type de degré',location.degreetype, true)
                 .addField('Temperature',`${current.temperature} °`, true)
                 .addField(':thermometer: Se sent comme', `${current.feelslike} °`, true)
                 .addField(':dash:  les vents',current.winddisplay, true)
                 .addField(':sweat_drops:Humidité', `${current.humidity}%`, true)
 
-                // Now, let's display it when called
+            
                 message.channel.send({embed});
         });
     }
 if(cmd === `${prefix}report`){
-                                                                                                          //!report @ned this is the reason
+                                                                                                    
                                                                                                           let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!rUser) return message.channel.send(":warning: Imposible de trouver cette utilisateur");           let rreason = args.join(" ").slice(22);                                                                                                                                                                     let reportEmbed = new Discord.RichEmbed()                                                             .setDescription("Reports")                                                                            .setColor("#15f153")
     .addField("Reported User", `${rUser} with ID: ${rUser.id}`)                                           .addField("Report Par", `${message.author}  ID: ${message.author.id}`)
@@ -95,7 +94,7 @@ if (message.content.startsWith(prefix + "avatar")) {
     }
   message.channel.send("", {embed})
 }
-if(message.content.startsWith(prefix + "invite")) {    // Donc ici ton !help (le préfixe que t'as mis est !)
+if(message.content.startsWith(prefix + "invite")) {  
     message.channel.send({
             embed: {
                 color: 0xC12127,
