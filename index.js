@@ -23,11 +23,65 @@ let games = [`Createur Narcisse| prefix: ${prefix}`, `` + prefix + `help`,`` + s
 });
 client.on('message', message => {
 
+let msg = message.content.toUpperCase();                                          let sender = message.author;                                 
+let cont = message.content.slice(prefix.length).split(" ");                                                             
+let args = cont.slice(1);                                                                let messageArray = message.content.split(" ");                                            let cmd = messageArray[0];
+
 if(message.content.startsWith("*help")){
 message.channel.send(` **:envelope_with_arrow: Le help est en Message privé** `)
 }
 if(message.content.startsWith("*serveur")){ message.channel.send(`Hey tu peux rejoindre le serveur des createurs du bot Ici https://discord.gg/EupK3xW`) 
 }
+if (msg.startsWith(prefix + 'méteo')) { // This checks to see if the beginning of the message is call
+ling the weather command.                                                                                     // You can find some of the code used here on the weather-js npm page in the description.                                                                                                                   weather.find({search: args.join(" "), degreeType: 'C'}, function(err, result) { // Make sure you get that args.join part, since it adds everything after weather.                                               if (err) message.channel.send(err);
+                                                                                                                  // We also want them to know if a place they enter is invalid.                                        if (result === undefined || result.length === 0){
+                message.channel.send('**Veuillez entrer un lieu valide.**') // This tells them in chat that the place they entered is invalid.                                                                              return; // This exits the code so the rest doesn't run.                                           }                                                                                                                                                                                                           // Variables                                                                                          var current = result[0].current; // This is a variable for the current part of the JSON output                                                                                                              var location = result[0].location; // This is a variable for the location part of the JSON
+ output
+                                                                                                                  // Let's use an embed for this.
+            const embed = new Discord.RichEmbed()                                                                     .setDescription(`**${current.skytext}**`) // This is the text of what the sky looks li
+ke, remember you can find all of this on the weather-js npm page.       
+.setAuthor(`Weather for ${current.observationpoint}`) // This shows the current location of the weather.                                                                                 .setThumbnail(current.imageUrl) // This sets the thumbnail of the embed                               
+.setColor(0x00AE86) // This sets the color of the embed, you can set this to anything if you look put a hex color picker, just make sure you put 0x infront of the hex                                      .
+addField('Fuseau horaire',`UTC${location.timezone}`, true) // This is the first field, it shows the timezone, and the true means `inline`, you can read more about this on the official discord.js documentation                                                                   .addField('Type de degré',location.degreetype, true)// This is the field that shows tt
+he degree type, and is inline
+                .addField('Temperature',`${current.temperature} °`, true)
+                .addField(':thermometer: Se sent comme', `${current.feelslike} °`, true)
+                .addField(':dash:  les vents',current.winddisplay, true)
+                .addField(':sweat_drops:Humidité', `${current.humidity}%`, true)
+
+                // Now, let's display it when called
+                message.channel.send({embed});
+        });
+    }
+if(cmd === `${prefix}report`){
+                                                                                                          //!report @ned this is the reason
+                                                                                                          let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!rUser) return message.channel.send(":warning: Imposible de trouver cette utilisateur");           let rreason = args.join(" ").slice(22);                                                                                                                                                                     let reportEmbed = new Discord.RichEmbed()                                                             .setDescription("Reports")                                                                            .setColor("#15f153")
+    .addField("Reported User", `${rUser} with ID: ${rUser.id}`)                                           .addField("Report Par", `${message.author}  ID: ${message.author.id}`)
+    .addField("Channel", message.channel)
+    .addField("Heure", message.createdAt)
+    .addField("Reason", rreason);
+
+    let reportschannel = message.guild.channels.find(`name`, "reports");
+    if(!reportschannel) return message.channel.send(":warning: Impossible de trouver la chaîne de rapp
+ports.");
+
+
+    message.delete().catch(O_o=>{});                                                                      reportschannel.send(reportEmbed);                                                                                                                                                                           return;                                                                                             }
+if(cmd === `${prefix}serverinfos`){
+
+    let sicon = message.guild.iconURL;
+    let serverembed = new Discord.RichEmbed()
+    .setDescription("Server Informations")                                                    .setColor("#15f153")
+    .setThumbnail(sicon)
+    .addField(":shield: Nom du serveur", message.guild.name)
+    .addField(":crown: Fondateur", `${message.guild.owner.user.tag}`)                          .addField(":hammer_and_pick:  Date de creation ", message.guild.createdAt)
+    .addField(":airplane_arriving:  Tu a rejoint", message.member.joinedAt)                    .addField(":earth_americas: Region", `${message.guild.region}`)
+     .addField('Channels', `${message.guild.channels.filter(chan => chan.type === 'voice')
+.size} :loud_sound: / ${message.guild.channels.filter(chan => chan.type === 'text').size}
+:keyboard:`)
+    .addField(":bust_in_silhouette: Members", message.guild.memberCount);
+    return message.channel.send(serverembed);                                               }
 if (message.content.startsWith(prefix + "avatar")) {
         if (!message.mentions.users.first()) return message.channel.send("** ❌ | Entrez un utilisateur.**")
    let user = message.mentions.users.first() ? message.mentions.users.first() : message.author
@@ -80,9 +134,9 @@ if(message.content === prefix + "help") {
 		.setColor('#FF0500')
 		.setTitle('Liste des commandes')
 		.setFooter('Made by Narcisse')
-		.addField('__**:gear:  Utile**__','\n ***avatar =>** Je donne  l avatar de la personne mentionnée \n ***ping =>** Je repond Pong + Ms')
+		.addField('__**:gear:  Utile**__','\n ***avatar =>** Je donne  l avatar de la personne mentionnée \n ***ping =>** Je repond Pong + Ms')***report =>** Permet de report une personne au pres des admins  \n***méteo <ville> =>** Permet de voir la météo d'une ville \n***serverinfos=>** Permet de voir kes infos d'un serveur \n
 		.addField('\n__**:newspaper2: Bot-Utiles**__','\n ***botinfos =>** Informations sur le bot \n ***invite =>** Invite le bot sur ton serveur \n ***serveur =>** rejoint mon serveur ')
-		.addField('\n__**:video_game:  Fun**__',' ***flip =>** Je lance une pièce \n ***test =>** pour voir si le bot fonctionne \n***google =>** Permet de faire un recherche google \n***afk =>** Permet de se mettre afk \n***remafk =>** enlève ton afk \n ')
+		.addField('\n__**:video_game:  Fun**__',' ***flip =>** Je lance une pièce \n ***test =>** pour voir si le bot fonctionne \n***search_google =>** Permet de faire un recherche google \n***afk =>** Permet de se mettre afk \n***remafk =>** enlève ton afk \n ')
 		.addField('\n__**:hammer_and_pick: Administration**__',' ***kick =>** Permet kick un membre  \n ****ban =>***Ban un membre \n***mute =>** Permet de  mute un membre \n***unmute =>** Permet de unmute un membre \n***say =>** Permet de faire parler le bot  \n')
 message.author.send(help_embed);
 }});
@@ -381,25 +435,6 @@ reminder(time, timeofreminder);
 }
 }
 
-if(msg.content.startsWith(prefix + 'kick')){
-if(msg.channel.type === 'dm') return;
-if(!msg.guild.member(msg.author).hasPermission('ADMINISTRATOR')){
-return msg.reply("**:x: Vous n'avez pas la permissions d'utiliser cette commande**").catch(console.error);
-}
-if(msg.mentions.users.size === 0){
-return msg.reply("**:x: Veuillez mentionner l'utilisateur que vous voulez kick**")
-}
-if(!msg.guild.member(client.user).hasPermission('ADMINISTRATOR')){
-return msg.reply("**:x: Je n'ai pas la permission `ADMINISTRATOR` pour kick cet utilisateur**").catch(console.error);
-}
-let kickMember = msg.guild.member(msg.mentions.users.first());
-if(!kickMember){
-return msg.channel.send("**:x: Cet utilisateur n'est certainement pas valide**")
-}
-kickMember.kick().then(member => {
-msg.channel.send(`**${member.user.username}** a bien été kick**`);
-})
-}
 if(msg.content.startsWith(prefix + 'ban')){
 if(msg.channel.type === 'dm') return;
 if(!msg.guild.member(msg.author).hasPermission('ADMINISTRATOR')){
