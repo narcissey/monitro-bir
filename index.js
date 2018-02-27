@@ -447,7 +447,7 @@ if(!banMember){
 return msg.channel.send("**:x: Cet utilisateur n'est certainement pas valide**")
 }
 banMember.ban().then(member => {
-msg.channel.send(`**${member.user.username}** est Ban **`);
+msg.channel.send(`**${member.user.username}** est allez au paradis :wave: `);
 })
 }
 if (message.content.startsWith(prefix + "mute")) {
