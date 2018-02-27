@@ -137,7 +137,17 @@ if(message.content === prefix + "help") {
 		.addField('\n__**:hammer_and_pick: Administration**__',' ***kick =>** Permet kick un membre  \n ****ban =>***Ban un membre \n***mute =>** Permet de  mute un membre \n***unmute =>** Permet de unmute un membre \n')
 message.author.send(help_embed);
 }});
-	
+
+client.on('message', message => {
+if (message.content === "*flip") {
+        var result = Math.floor((Math.random() * 2) + 1);
+        if (result == 1) {
+        message.channel.send("**Pile !**");
+        } else if (result == 2) {
+                message.channel.send("**Face !**");
+        }
+    }
+});
  
 	
 	
@@ -448,7 +458,7 @@ if(!banMember){
 return msg.channel.send("**:x: Cet utilisateur n'est certainement pas valide**")
 }
 banMember.ban().then(member => {
-msg.channel.send(`**${member.user.username}** a bien été ban**`);
+msg.channel.send(`**${member.user.username}** est Ban **`);
 })
 }
 if (message.content.startsWith(prefix + "mute")) {
