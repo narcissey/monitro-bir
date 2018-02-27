@@ -210,17 +210,6 @@ message.reply(`Vous êtes actuellement niveau ${userData.level}, avec ${userData
 }
 fs.writeFile('./points.json', JSON.stringify(points), (err) => {if(err) console.error(err)});
 });
-client.on('message', message => {
-if (message.content === "*flip") {
-    	var result = Math.floor((Math.random() * 2) + 1);
-    	if (result == 1) {
-    	message.channel.send("**Pile !**");
-    	} else if (result == 2) {
-    		message.channel.send("**Face !**");
-    	}
-    }
- 
-});
 client.on("message", message => {
     if(message.content.startsWith(prefix + "search_google")) {
         var host_search_google = "https://www.google.fr/search?q=";
