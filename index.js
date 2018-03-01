@@ -51,6 +51,30 @@ addField('Fuseau horaire',`UTC${location.timezone}`, true) // This is the first 
                 message.channel.send({embed});
 
     }
+if(message.content.startsWith(prefix + "uinfos")) {
+let User = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
+    if(!User) return message.channel.send("**Je ne trouve pas l'utilisteur . Veuillez ressayer.**");
+    
+   
+
+    let uinfoEmbed = new Discord.RichEmbed()
+    .setDescription("__**UserInfo**__")
+    .setColor('#00FFE8')
+    .addField("🤚 Pseudo", `${User.user.username}`)
+    .addField("#⃣ ", `${User.user.discriminator}`)
+    .addField("🆔", `${User.user.id}`)
+    .addField("🌍 Créé le", `${User.user.createdAt}`)
+    .addField("Dernier message envoyé", `${User.user.lastMessage}`)
+    .addField("🤖 Bot ?", `${User.user.bot}`)
+     .setThumbnail(User.user.displayAvatarURL);
+
+    
+
+
+    message.channel.send(uinfoEmbed);
+
+ }
+
 if(cmd === `${prefix}report`){
                                                                                                           //!report @ned this is the reason
                                                                                                           let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
