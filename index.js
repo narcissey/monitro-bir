@@ -153,14 +153,35 @@ let User = message.guild.member(message.mentions.users.first() || message.guild.
 
  }
 
+if(message.content.startsWith(prefix + "8ball")) {
+if(!args) return message.reply("Please ask a full question")
+  let replies = ["Oui", "Non", "Possible", "Re pose la Question","Certainement","Certainem
+ent pas"];
+ let result = Math.floor((Math.random() * replies.length));
+  let question = args.slice(1).join(" ");                                                   let ballembed = new Discord.RichEmbed()
+ .setAuthor(message.author.tag)
+  .setColor("#42f453")
+  .addField("Question", question)
+  .addField("Reponse", replies[result]);
+  message.channel.send(ballembed)
+}
+if(message.content.startsWith(prefix + "list")) {
+
+    let uinfoEmbed = new Discord.RichEmbed()
+    .setDescription("__**Infos**__")
+                                                      .setColor('#00FFE8')
+    .addField("Serveur liste", `${client.guilds.map(g=>g.name).join("\n")}`)
+
+    message.channel.send(uinfoEmbed);                                                     
+     }
 if(cmd === `${prefix}report`){
                                                                                                           //!report @ned this is the reason
                                                                                                           let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!rUser) return message.channel.send(":warning: Imposible de trouver cette utilisateur");           let rreason = args.join(" ").slice(22);                                                                                                                                                                     let reportEmbed = new Discord.RichEmbed()                                                             .setDescription("Reports")                                                                            .setColor("#15f153")
-    .addField("Reported User", `${rUser} with ID: ${rUser.id}`)                                           .addField("Report Par", `${message.author}  ID: ${message.author.id}`)
+    .addField("Reported User", `${rUser.user.tag} :id: ${rUser.id}`)                                           .addField("Report Par", `${message.author.tag} :id: ${message.author.id}`)
     .addField("Channel", message.channel)
     .addField("Heure", message.createdAt)
-    .addField("Reason", rreason);
+    .addField("Raison", rreason);
  
     let reportschannel = message.guild.channels.find(`name`, "reports");
     if(!reportschannel) return message.channel.send(":warning: Impossible de trouver la chaîne de rappports.");
