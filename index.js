@@ -23,82 +23,7 @@ let games = [`Createur Narcisse| prefix: ${prefix}`, `` + prefix + `help`,`` + s
   console.log("MoNitro online\nNombre de serveurs: " + serverNumber + "\navec\n" + memberNumber + " utilisateurs");
  
 });
-var messages = [];
-client.on('message', message => {
-  const msgc = message.content;
-   music.setVoiceChannel(message.member.voiceChannel);
-    var array_msg = msgc.split(' ');
-            messages.push(message);
-            switch (array_msg[0]) {
-        case (prefix +"play") :
-            con("Play");
-            message.delete(message.author);
-            if (!music.getVoiceChannel()) return message.reply("Veuillez vous connectez en vocal !");
-            if (music.getTab(0) == null) return message.reply('Aucune musique, merci d\' en ajouté.');
-            else music.voice();
-            break;
-        case (prefix +"pause") :
-            con("Pause");
-            message.delete(message.author);
-            if (!music.getVoiceChannel()) return message.reply("Veuillez vous connectez en vocal !");
-            if (music.getTab(0) == null) return message.reply('Aucune musique, merci d\' en ajouté.');
-            music.pause();
-            break;
-        case (prefix + "resume") :
-            con("Resume");
-            message.delete(message.author);
-            if (!music.getVoiceChannel()) return message.reply("Veuillez vous connectez en vocal !");
-            if (music.getTab(0) == null) return message.reply('Aucune musique, merci d\' en ajouté.');
-            music.resume();
-            break;
-        case (prefix + "stop") :
-            con("Stop");
-            message.delete(message.author);
-            if (!music.getVoiceChannel()) return message.reply("Veuillez vous connectez en vocal !");
-            if (music.getTab(0) == null) return message.reply('Aucune musique, merci d\' en ajouté.');
-            else music.stop();
-            message.reply("La queue à était vidé !");
-            break;
-        case (prefix +"add") :
-            con("Add");
-            message.delete(message.author);
-            var link = msgc.split(' ');
-            link.shift();
-            link = link.join(' ');
-            search(link, opts, function(err, results) {
-                if(err) return con(err);
-                for (var y = 0; results[y].kind == 'youtube#channel'; y++);
-                message.channel.sendMessage(results[y].link);
-                music.setTabEnd(results[y].link);
-            });
-            break;
-        case (prefix +"link") :
-            con("Link");
-            message.delete(message.author);
-            var link = msgc.split(' ');
-            link.shift();
-            link = link.join(' ');
-            con(link);
-            music.setTabEnd(link);
-            break;
-        case (prefix +"volume") :
-            con("Volume");
-            message.delete(message.author);
-            var link = msgc.split(' ');
-            link.shift();
-            link = link.join(' ');
-            music.volume(link/100);
-            message.reply("le volume et maintenant à :" + link);
-            break;
-        case (prefix +"next") :
-            con("Next");
-            message.delete(message.author);
-            if (music.getI() < music.getLengthTab()) music.setI(this.i + 1);
-            if (music.getI() >= music.getLengthTab()) music.setI(0);
-            music.next();
-            break;
-    }  
-});
+
 client.on('message', message => {
  
 let msg = message.content.toUpperCase();                                          let sender = message.author;                                 
@@ -151,12 +76,11 @@ let User = message.guild.member(message.mentions.users.first() || message.guild.
 
     message.channel.send(uinfoEmbed);
 
- }
+}
 
 if(message.content.startsWith(prefix + "8ball")) {
 if(!args) return message.reply("Please ask a full question")
-  let replies = ["Oui", "Non", "Possible", "Re pose la Question","Certainement","Certainem
-ent pas"];
+  let replies = ["Oui", "Non", "Possible", "Re pose la Question","Certainement","Certainement pas"];
  let result = Math.floor((Math.random() * replies.length));
   let question = args.slice(1).join(" ");                                                   let ballembed = new Discord.RichEmbed()
  .setAuthor(message.author.tag)
