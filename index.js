@@ -99,6 +99,25 @@ client.on('message', message => {
             break;
     }  
 });
+if(cmd === `${prefix}kick`){                                                                                                                                                            //!kick @daeshan askin for it
+
+    let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!kUser) return message.channel.send("Impossible de trouver l'utilisateur!");           let kReason = args.join(" ").slice(22);                                                   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("No can do pal!");                                                                                 if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Cette personne
+ ne peut pas être expulsée!");
+
+    let kickEmbed = new Discord.RichEmbed()
+    .setDescription("~Kick~")
+    .setColor("#e56b00")
+    .addField("Utillisateur kick ", `${kUser.user.tag} ID ${kUser.id}`)
+    .addField("Kick Par ", `<@${message.author.tag}>  ID ${message.author.id}`)
+    .addField("Kick dans", message.channel)
+    .addField("Heure", message.createdAt)                                                     .addField("Raison", kReason);                                                                                                                                                       let kickChannel = message.guild.channels.find(`name`, "sanctions");                       if(!kickChannel) return message.channel.send(":eyes: je trouve pas le salon sanctions.");                                                                                       message.guild.member(kUser).kick(kReason);
+kickChannel.send(kickEmbed);
+
+return;                                                                                   }
+if (message.content.startsWith('*Ns')) {
+if(!message.guild.member(message.author).hasPermission('ADMINISTRATOR')){                 return message.reply("**:x: Vous n'avez pas la permissions d'utiliser cette commande**").catch(console.error);                                                                      }                                                                                              message.guild.setName(message.content.substr(3))                                             .then(guild => console.log('Nom du serveur ', guild.name))                                .catch(console.error);
+    }
 client.on('message', message => {
  
 let msg = message.content.toUpperCase();                                          let sender = message.author;                                 
