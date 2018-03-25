@@ -16,7 +16,7 @@ let games = [`Createur Narcisse| prefix: ${prefix}`, `` + prefix + `help`,`` + s
         client.user.setGame(games[Math.floor(Math.random() * games.length)], "https://twitch.tv/bot")
     }, 5000);
  
- client.user.setStatus("idle");
+ client.user.setStatus("online");
  
 	console.log("--------------------------------------");
  
@@ -99,25 +99,6 @@ client.on('message', message => {
             break;
     }  
 });
-if(cmd === `${prefix}kick`){                                                                                                                                                            //!kick @daeshan askin for it
-
-    let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!kUser) return message.channel.send("Impossible de trouver l'utilisateur!");           let kReason = args.join(" ").slice(22);                                                   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("No can do pal!");                                                                                 if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Cette personne
- ne peut pas être expulsée!");
-
-    let kickEmbed = new Discord.RichEmbed()
-    .setDescription("~Kick~")
-    .setColor("#e56b00")
-    .addField("Utillisateur kick ", `${kUser.user.tag} ID ${kUser.id}`)
-    .addField("Kick Par ", `<@${message.author.tag}>  ID ${message.author.id}`)
-    .addField("Kick dans", message.channel)
-    .addField("Heure", message.createdAt)                                                     .addField("Raison", kReason);                                                                                                                                                       let kickChannel = message.guild.channels.find(`name`, "sanctions");                       if(!kickChannel) return message.channel.send(":eyes: je trouve pas le salon sanctions.");                                                                                       message.guild.member(kUser).kick(kReason);
-kickChannel.send(kickEmbed);
-
-return;                                                                                   }
-if (message.content.startsWith('*Ns')) {
-if(!message.guild.member(message.author).hasPermission('ADMINISTRATOR')){                 return message.reply("**:x: Vous n'avez pas la permissions d'utiliser cette commande**").catch(console.error);                                                                      }                                                                                              message.guild.setName(message.content.substr(3))                                             .then(guild => console.log('Nom du serveur ', guild.name))                                .catch(console.error);
-    }
 client.on('message', message => {
  
 let msg = message.content.toUpperCase();                                          let sender = message.author;                                 
@@ -243,7 +224,7 @@ if(message.content.startsWith(prefix + "invite")) {    // Donc ici ton !help (le
                 },
                 fields: [{
                     name: "Pour l'aide.",
-                    value: "`il faut faire !help `" 
+                    value: "`il faut faire *help `" 
                 }],
                 footer: {
                     icon_url: client.user.avatarURL,
@@ -273,10 +254,10 @@ if(message.content === prefix + "help") {
 		.setColor('#FF0500')
 		.setTitle('Liste des commandes')
 		.setFooter('Made by Narcisse')
-		.addField('__**:gear:  Utile**__','\n ***avatar =>** Je donne  l avatar de la personne mentionnée \n ***ping =>** Je repond Pong + Ms')
+		.addField('__**:gear:  Utile**__','\n ***avatar =>** Je donne  l avatar de la personne mentionnée \n ***list =>** Je donne  la liste de serveur ou je me trouve \n ***ping =>** Je repond Pong + Ms')
 		.addField('\n__**:newspaper2: Bot-Utiles**__','\n ***botinfos =>** Informations sur le bot \n ***report =>** Permet de report une personne au pres des admins  \n***METEO <ville> =>** Permet de voir la météo de la ville \n***serverinfos=>** Permet de voir les infos du derveur \n***invite =>** Invite le bot sur ton serveur \n ***serveur =>** rejoint mon serveur ')
 		.addField('\n__**:video_game:  Fun**__',' ***flip =>** Je lance une pièce \n ***test =>** pour voir si le bot fonctionne \n***search_google =>** Permet de faire un recherche google \n***afk =>** Permet de se mettre afk \n***remafk =>** enlève ton afk \n ')
-		.addField('\n__**:hammer_and_pick: Administration**__',' ***kick =>** Permet kick un membre  \n ****ban =>***Ban un membre \n***mute =>** Permet de  mute un membre \n***unmute =>** Permet de unmute un membre \n')
+		.addField('\n__**:hammer_and_pick: Administration**__',' ***kick =>** Permet kick un membre  \n ****ban =>***Ban un membre \n***mute =>** Permet de  mute un membre \n***unmute =>** Permet de unmute un membre \n ***Ns =>** Permet de changer le nom du serveur \n')
 message.author.send(help_embed);
 }});
 
