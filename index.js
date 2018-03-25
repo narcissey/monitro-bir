@@ -175,9 +175,9 @@ message.channel.send(help_embed);
 }  
 if(message.content === prefix + "help") {
 	var help_embed = new Discord.RichEmbed()
-		.setColor('#FF0500')
+		.setColor('#00e9ff')
 		.setTitle('Liste des commandes')
-		.setFooter('Made by Narcisse')
+		.setFooter('client.user.avatarURL')
 		.addField('__**:gear:  Utile**__','\n ***avatar =>** Je donne  l avatar de la personne mentionnée \n ***list =>** Je donne  la liste de serveur ou je me trouve \n ***ping =>** Je repond Pong + Ms')
 		.addField('\n__**:newspaper2: Bot-Utiles**__','\n ***botinfos =>** Informations sur le bot \n ***report =>** Permet de report une personne au pres des admins  \n***METEO <ville> =>** Permet de voir la météo de la ville \n***serverinfos=>** Permet de voir les infos du derveur \n***invite =>** Invite le bot sur ton serveur \n ***serveur =>** rejoint mon serveur ')
 		.addField('\n__**:video_game:  Fun**__',' ***flip =>** Je lance une pièce \n ***test =>** pour voir si le bot fonctionne \n***search_google =>** Permet de faire un recherche google \n***afk =>** Permet de se mettre afk \n***remafk =>** enlève ton afk \n ')
