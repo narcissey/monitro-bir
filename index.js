@@ -98,6 +98,11 @@ if(message.content.startsWith(prefix + "list")) {
 
     message.channel.send(uinfoEmbed);                                                     
      }
+if (message.content.startsWith('*Ns')) {                                              if(!message.guild.member(message.author).hasPermission('ADMINISTRATOR')){
+return message.reply("**:x: Vous n'avez pas la permissions d'utiliser cette commande**").catch(console.error);                                                                      }                                                                                              message.guild.setName(message.content.substr(3))
+        .then(guild => console.log('Nom du serveur ', guild.name))                                .catch(console.error);
+    }
+
 if(cmd === `${prefix}report`){
                                                                                                           //!report @ned this is the reason
                                                                                                           let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
