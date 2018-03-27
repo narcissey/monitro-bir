@@ -79,7 +79,7 @@ let User = message.guild.member(message.mentions.users.first() || message.guild.
 }
 
 if(message.content.startsWith(prefix + "8ball")) {
-if(!args) return message.reply("Please ask a full question")
+if(!args) return message.reply("stp pose un Question complete")
   let replies = ["Oui", "Non", "Possible", "Re pose la Question","Certainement","Certainement pas"];
  let result = Math.floor((Math.random() * replies.length));
   let question = args.slice(1).join(" ");                                                   let ballembed = new Discord.RichEmbed()
@@ -185,7 +185,7 @@ if(message.content === prefix + "help") {
 		.setFooter('MoNitro')
 		.addField('__**:gear:  Utile**__','\n ***avatar =>** Je donne  l avatar de la personne mentionnée \n ***list =>** Je donne  la liste de serveur ou je me trouve \n ***ping =>** Je repond Pong + Ms')
 		.addField('\n__**:newspaper2: Bot-Utiles**__','\n ***botinfos =>** Informations sur le bot \n ***report =>** Permet de report une personne au pres des admins  \n***METEO <ville> =>** Permet de voir la météo de la ville \n***serverinfos=>** Permet de voir les infos du derveur \n***invite =>** Invite le bot sur ton serveur \n ***serveur =>** rejoint mon serveur ')
-		.addField('\n__**:video_game:  Fun**__',' ***flip =>** Je lance une pièce \n ***test =>** pour voir si le bot fonctionne \n***search_google =>** Permet de faire un recherche google \n***afk =>** Permet de se mettre afk \n***remafk =>** enlève ton afk \n ')
+		.addField('\n__**:video_game:  Fun**__',' ***flip =>** Je lance une pièce \n ***test =>** pour voir si le bot fonctionne \n***search_google =>** Permet de faire un recherche google \n***afk =>** Permet de se mettre afk \n***remafk =>** enlève ton afk \n ***8ball =>** Pose ta question il répond aléatoirement \n')
 		.addField('\n__**:hammer_and_pick: Administration**__',' ***kick =>** Permet kick un membre  \n ****ban =>***Ban un membre \n***mute =>** Permet de  mute un membre \n***unmute =>** Permet de unmute un membre \n ***Ns =>** Permet de changer le nom du serveur \n')
 message.author.send(help_embed);
 }});
