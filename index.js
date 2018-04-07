@@ -543,7 +543,7 @@ if(!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return m
     if(!args) return message.channel.send("Vous voulez rien me faire répéter ?");
     message.delete()
     var embed = new Discord.RichEmbed();
-    embed.setColor(0xFF358B)
+    embed.setColor(#8BFF35)
       .setDescription(args)
     message.channel.sendEmbed(
       embed, {
