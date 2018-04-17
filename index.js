@@ -167,8 +167,6 @@ if(message.content === prefix + "botinfos") {
 		.setColor('#FF0004')
 		.setTitle('Infos du Bot')
 		.addField('Informations principales du bot','Ce Bot est un bot programé sur telephone donc si bug veuillez me le dire en mp ')
-		.addField('Nouveautées d bot ','*newsbot => Nouveautés')
-		.addField('Petites infos','*owner => Je vous dit mon createur')
 		.addField('\n**Version:**','2.4')
 		.addField('**Logiciel:**','Nodejs')
 		.addField('**Date de creation:**','22/11/17')
