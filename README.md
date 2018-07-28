@@ -1,2 +1,0 @@
-# monitro-bir
-Teses
